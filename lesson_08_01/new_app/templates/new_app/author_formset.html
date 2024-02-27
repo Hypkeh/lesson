@@ -1,0 +1,16 @@
+{% extends "new_app/post_main.html" %}
+
+{% block content %}
+    <h1>Author Formset</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ formset.management_form }}
+        {% for form in formset %}
+        <div>
+            {{ form.id }}
+            {{ form.as_p }}
+        </div>
+        {% endfor %}
+        <button type="submit" value="Submit">Submit</button>
+    </form>
+{% endblock %}

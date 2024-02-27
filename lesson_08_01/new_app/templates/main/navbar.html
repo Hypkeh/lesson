@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <title>{% block title %}Title{% endblock %}</title>
-    <link rel="stylesheet" href="{% static 'style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
 </head>
 <body>
     <nav>
@@ -17,6 +17,12 @@
             </li>
             <li>
                 <a href="{% url 'main_page' %}">Главная страница</a>
+            </li>
+            <li>
+                <form method="get" action="{% url 'search_form' %}">
+                    {{ search_form.as_p }}
+                    <input type="submit" value="Найти">
+                </form>
             </li>
         </ul>
     </nav>

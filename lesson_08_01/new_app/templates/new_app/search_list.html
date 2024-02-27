@@ -1,0 +1,11 @@
+{% extends 'main/navbar.html' %}
+
+{% block title %}Search Results{% endblock %}
+
+{% block content %}
+<div>
+    {% for object in object_list %}
+    <p><a href="{% url object.url_name pk=object.pk %}">{{ object.obj_name }}</a></p>
+    {% endfor %}
+</div>
+{% endblock %}

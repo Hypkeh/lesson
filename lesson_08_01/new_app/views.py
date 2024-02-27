@@ -6,11 +6,47 @@ from django.urls import reverse_lazy
 from django.shortcuts import render
 from django.core.paginator import Paginator
 from django.http import HttpResponse
+from django.db.models import Value, F
 
 from .models import Post, Author, Category
-from .forms import AuthorForm, PostForm, UserRegistrationForm
+from .forms import AuthorForm, PostForm, UserRegistrationForm, SearchForm, AuthorFormset
 
 
+def author_formset(request):
+    if request.method == 'POST':
+        formset = AuthorFormset(request.POST)
+        if formset.is_valid():
+            formset.save()
+            return HttpResponse('ok')
+    else:
+        formset = AuthorFormset()
+    context = {'formset': formset}
+    return render(request, 'new_app/author_formset.html', context)
+
+
+
+class AuthorDetail(DetailView):
+    model = Author
+    context_object_name = 'author'
+
+
+class CategoryDetail(DetailView):
+    model = Category
+    context_object_name = 'category'
+
+
+def search(request):
+    if request.method == 'GET':
+        get_data = request.GET
+        form = SearchForm(get_data)
+        if form.is_valid():
+            q = form.cleaned_data['q']
+            authors = Author.objects.filter(name__icontains=q).annotate(url_name=Value('author_detail'), obj_name=F('name'))
+            posts = Post.objects.filter(title__icontains=q).annotate(url_name=Value('post_detail'), obj_name=F('title'))
+            categories = Category.objects.filter(name__icontains=q).annotate(url_name=Value('category_detail'), obj_name=F('name'))
+            object_list = list(authors) + list(posts) + list(categories)
+            context = {'object_list': object_list}
+            return render(request, 'new_app/search_list.html', context)
 
 
 class UserRegisterView(FormView):

@@ -1,8 +1,15 @@
-from django.forms import ModelForm, modelform_factory
+from django.forms import ModelForm, modelform_factory, Form, modelformset_factory
 from django import forms
 from django.contrib.auth.models import User
 
-from .models import Author, Post
+from .models import Author, Post, Category
+
+
+AuthorFormset = modelformset_factory(Author, fields='__all__')
+
+
+class SearchForm(forms.Form):
+    q = forms.CharField(max_length=20, label='Поиск по словам')
 
 
 class UserRegistrationForm(forms.ModelForm):
@@ -72,3 +79,11 @@ class PostForm(ModelForm):
 # EmailInput
 # PasswordInput
 # DateInput
+
+
+class CategoryForm(forms.ModelForm):
+
+
+    class Meta:
+        fields = '__all__'
+        model = Category

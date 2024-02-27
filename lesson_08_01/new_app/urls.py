@@ -9,10 +9,16 @@ urlpatterns = [
     path('posts/<int:pk>/delete/', views.PostDelete.as_view(), name='post_delete'),
 
     path('authors/', views.AuthorList.as_view(), name='author_list'),
+    path('author/<int:pk>/', views.AuthorDetail.as_view(), name='author_detail'),
     path('authors/create/', views.AuthorCreate.as_view(), name='create_author'),
+
+    path('category/<int:pk>/', views.CategoryDetail.as_view(), name='category_detail'),
 
     path('', views.MainPage.as_view(), name='main_page'),
 
     path('register/', views.UserRegisterView.as_view(), name='registration'),
+    path('search/', views.search, name='search_form'),
+
+    path('author_formset/', views.author_formset, name='author_formset')
 ]
 
