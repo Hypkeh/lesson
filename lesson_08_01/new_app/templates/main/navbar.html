@@ -1,8 +1,10 @@
 <!DOCTYPE html>
+{% load static %}
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>{% block title %}{% endblock %}</title>
+    <title>{% block title %}Title{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
 </head>
 <body>
     <nav>
@@ -16,10 +18,19 @@
             <li>
                 <a href="{% url 'main_page' %}">Главная страница</a>
             </li>
+            <li>
+                <form method="get" action="{% url 'search_form' %}">
+                    {{ search_form.as_p }}
+                    <input type="submit" value="Найти">
+                </form>
+            </li>
         </ul>
     </nav>
     <h1>Welcome, {{ user.username|default:"Пользователь" }}</h1>
     <div>
+        <img src="{% static 'image.jpg' %}">
+    </div>
+    <div class="content">
         {% block content %}
         {% endblock %}
     </div>
