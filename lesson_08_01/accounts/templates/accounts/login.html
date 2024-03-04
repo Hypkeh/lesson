@@ -1,0 +1,17 @@
+{% extends 'main/navbar.html' %}
+
+{% block title %}Вход в сеть{% endblock %}
+
+{% block content %}
+<h2>Вход</h2>
+{% if user.is_authenticated %}
+<p>Вы уже вошли в сеть</p>
+{% else %}
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="hidden" value="{{ next }}">
+    <input type="submit" value="Войти">
+</form>
+{% endif %}
+{% endblock %}

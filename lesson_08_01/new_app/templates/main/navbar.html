@@ -24,6 +24,18 @@
                     <input type="submit" value="Найти">
                 </form>
             </li>
+            {% if user.is_authenticated %}
+            <li>
+                <form method="post" action="{% url 'logout_view' %}">
+                    {% csrf_token %}
+                    <button type="submit" value="Выйти из сети">Выйти из сети</button>
+                </form>
+            </li>
+            {% else %}
+            <li>
+                <p><a href="{% url 'login_view' %}">Войти в сеть</a></p>
+            </li>
+            {% endif %}
         </ul>
     </nav>
     <h1>Welcome, {{ user.username|default:"Пользователь" }}</h1>

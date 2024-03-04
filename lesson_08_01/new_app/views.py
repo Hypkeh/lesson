@@ -7,11 +7,13 @@ from django.shortcuts import render
 from django.core.paginator import Paginator
 from django.http import HttpResponse
 from django.db.models import Value, F
+from django.contrib.auth.decorators import login_required
 
 from .models import Post, Author, Category
 from .forms import AuthorForm, PostForm, UserRegistrationForm, SearchForm, AuthorFormset
 
 
+@login_required
 def author_formset(request):
     if request.method == 'POST':
         formset = AuthorFormset(request.POST)
