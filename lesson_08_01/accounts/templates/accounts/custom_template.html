@@ -1,0 +1,9 @@
+{% extends 'main/navbar.html' %}
+
+{% block title %}Разрешения{% endblock %}
+
+{% block content %}
+{% for perm in data %}
+<p>{{ perm }}</p>
+{% endfor %}
+{% endblock %}
