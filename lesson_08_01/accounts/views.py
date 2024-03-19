@@ -2,11 +2,22 @@ from django.shortcuts import render
 from django.contrib.auth.views import LoginView, LogoutView, PasswordChangeView
 from django.contrib.auth.forms import AuthenticationForm
 from django.views.generic import TemplateView
+from django.views.generic.edit import CreateView
 from django.contrib.auth import authenticate, login
 from django.http import HttpResponseRedirect, HttpResponse
 from django.conf import settings
+from django.urls import reverse_lazy
+from django.contrib.auth.models import User
+
+from . import forms
 
 # Create your views here.
+
+
+class SignUpView(CreateView):
+    form_class = forms.SignUpForm
+    success_url = reverse_lazy('user_profile')
+    template_name = 'new_app/post_form.html'
 
 
 def profile_view(request):

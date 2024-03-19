@@ -31,9 +31,15 @@
                     <button type="submit" value="Выйти из сети">Выйти из сети</button>
                 </form>
             </li>
+            <li>
+                <a href="{% url 'author_formset' %}">Author formset</a>
+            </li>
             {% else %}
             <li>
                 <p><a href="{% url 'login_view' %}">Войти в сеть</a></p>
+            </li>
+            <li>
+                <p><a href="{% url 'user_register' %}">Зарегестрироваться</a></p>
             </li>
             {% endif %}
         </ul>

@@ -1,9 +1,10 @@
-1) Model
-2) View
-3) Template (шаблон)
-https://teams.microsoft.com/l/meetup-join/19:pC5Hf90o5WeQUBjsz1NajQ1BByQek0A-v-Z12q84lSE1@thread.tacv2/1708953122171?context=%7B%22Tid%22:%2299d1cd1c-51b4-4ca9-a4d6-dc2ba06d1c42%22,%22Oid%22:%22ac485fd3-c1b8-4d7a-aae0-a903178a216f%22%7Dhttps://teams.microsoft.com/l/meetup-join/19:pC5Hf90o5WeQUBjsz1NajQ1BByQek0A-v-Z12q84lSE1@thread.tacv2/1708953122171?context=%7B%22Tid%22:%2299d1cd1c-51b4-4ca9-a4d6-dc2ba06d1c42%22,%22Oid%22:%22ac485fd3-c1b8-4d7a-aae0-a903178a216f%22%7D
 
-Алгоритм действий
+1) Выполню работу
+2) Сигналы
+3) События
+4) Свои события
+5) Практическая работа
+
 
 DRY - Don't Repeat Yourself
 

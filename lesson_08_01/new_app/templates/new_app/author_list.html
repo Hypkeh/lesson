@@ -4,6 +4,7 @@
 
 {% block content %}
     {% for author in author_list %}
+    <p>{{ author.pk }}</p>
     <p>{{ author.name }}</p>
     <p>{{ author.email }}</p>
     <p>{{ author.bio }}</p>

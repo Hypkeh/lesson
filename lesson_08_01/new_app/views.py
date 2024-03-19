@@ -7,13 +7,22 @@ from django.shortcuts import render
 from django.core.paginator import Paginator
 from django.http import HttpResponse
 from django.db.models import Value, F
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required, permission_required, user_passes_test
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin, PermissionRequiredMixin
 
 from .models import Post, Author, Category
 from .forms import AuthorForm, PostForm, UserRegistrationForm, SearchForm, AuthorFormset
 
 
-@login_required
+# def login_required_decorator(view):
+#     def wrapper(request):
+#         if request.user.is_authenticated:
+#             return view(request)
+#         else:
+#             return HttpResponse
+#     return wrapper
+
+@user_passes_test(lambda user: user.is_superuser)
 def author_formset(request):
     if request.method == 'POST':
         formset = AuthorFormset(request.POST)
@@ -26,10 +35,10 @@ def author_formset(request):
     return render(request, 'new_app/author_formset.html', context)
 
 
-
-class AuthorDetail(DetailView):
+class AuthorDetail(PermissionRequiredMixin, DetailView):
     model = Author
     context_object_name = 'author'
+    permission_required = ['new_app.view_author']
 
 
 class CategoryDetail(DetailView):
@@ -80,9 +89,10 @@ class AuthorList(ListView):
 class AuthorCreate(CreateView):
     form_class = AuthorForm
     model = Author
+    success_url = '/'
 
 
-class PostList(ListView):
+class PostList(LoginRequiredMixin, ListView):
     model = Post
     paginate_by = 2
     paginate_orphans = 1

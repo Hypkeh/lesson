@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     # local
     'new_app',
     'ads',
+    'task',
 ]
 
 MIDDLEWARE = [
