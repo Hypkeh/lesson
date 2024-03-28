@@ -3,7 +3,21 @@ from django.db import models
 # Create your models here.
 
 
+class AuthorManager(models.Manager):
+
+    def get_authors_with_letter(self, letter):
+        return self.filter(name__icontains=letter)
+
+
+class PostManager(models.Manager):
+
+    def all(self):
+        return self.select_related('author_id').all()
+
+
 class Author(models.Model):
+    objects = AuthorManager()
+
     name = models.CharField(max_length=50)
     email = models.EmailField(unique=True, null=True, blank=True)
     bio = models.TextField()
@@ -13,6 +27,8 @@ class Author(models.Model):
 
 
 class Post(models.Model):
+    objects = PostManager()
+
     STATUS = (('p', 'Опубликовано'),
               ('d', 'Предварительная версия'),
               ('h', 'Спрятан'))

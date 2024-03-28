@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'new_app',
     'ads',
     'task',
+    'articles',
 ]
 
 MIDDLEWARE = [

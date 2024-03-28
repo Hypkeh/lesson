@@ -19,6 +19,8 @@ urlpatterns = [
     path('register/', views.UserRegisterView.as_view(), name='registration'),
     path('search/', views.search, name='search_form'),
 
-    path('author_formset/', views.author_formset, name='author_formset')
+    path('author_formset/', views.author_formset, name='author_formset'),
+
+    path('atomic/', views.add_record)
 ]
 

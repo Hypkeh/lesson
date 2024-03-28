@@ -9,6 +9,7 @@ from django.http import HttpResponse
 from django.db.models import Value, F
 from django.contrib.auth.decorators import login_required, permission_required, user_passes_test
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin, PermissionRequiredMixin
+from django.db.transaction import atomic
 
 from .models import Post, Author, Category
 from .forms import AuthorForm, PostForm, UserRegistrationForm, SearchForm, AuthorFormset
@@ -136,6 +137,13 @@ class PostDelete(DeleteView):
 class MainPage(TemplateView):
     template_name = 'new_app/about.html'
 
+
+def add_record(request):
+    category = Category.objects.create(name='test_atomic')
+    category = Category.objects.create(name='test_atomic2')
+    1/0
+    category = Category.objects.create(name='test_atomic3')
+    return HttpResponse('atomic')
 
 
 
