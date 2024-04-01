@@ -1,48 +1,54 @@
+{% load bootstrap4 %}
 <!DOCTYPE html>
 {% load static %}
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>{% block title %}Title{% endblock %}</title>
-    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    {% bootstrap_css %}
 </head>
 <body>
-    <nav>
-        <ul>
-            <li>
-                <a href="{% url 'post_list' %}">Посты</a>
-            </li>
-            <li>
-                <a href="{% url 'author_list' %}">Авторы</a>
-            </li>
-            <li>
-                <a href="{% url 'main_page' %}">Главная страница</a>
-            </li>
-            <li>
-                <form method="get" action="{% url 'search_form' %}">
-                    {{ search_form.as_p }}
-                    <input type="submit" value="Найти">
-                </form>
-            </li>
-            {% if user.is_authenticated %}
-            <li>
-                <form method="post" action="{% url 'logout_view' %}">
-                    {% csrf_token %}
-                    <button type="submit" value="Выйти из сети">Выйти из сети</button>
-                </form>
-            </li>
-            <li>
-                <a href="{% url 'author_formset' %}">Author formset</a>
-            </li>
-            {% else %}
-            <li>
-                <p><a href="{% url 'login_view' %}">Войти в сеть</a></p>
-            </li>
-            <li>
-                <p><a href="{% url 'user_register' %}">Зарегестрироваться</a></p>
-            </li>
-            {% endif %}
-        </ul>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">Навигационная панель</a>
+                <div class="collapse navbar-collapse">
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'post_list' %}">Посты</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'author_list' %}">Авторы</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'main_page' %}">Главная страница</a>
+                        </li>
+                    </ul>
+                    <form class="form-inline my-2 my-lg-2" method="get" action="{% url 'search_form' %}">
+                        {{ search_form.as_p }}
+                        <input type="submit" value="Найти">
+                    </form>
+                    {% if user.is_authenticated %}
+                    <ul>
+                        <li>
+                            <form method="post" action="{% url 'logout_view' %}">
+                                {% csrf_token %}
+                                <button type="submit" value="Выйти из сети">Выйти из сети</button>
+                            </form>
+                        </li>
+                        <li>
+                            <a href="{% url 'author_formset' %}">Author formset</a>
+                        </li>
+                        {% else %}
+                        <li>
+                            <p><a href="{% url 'login_view' %}">Войти в сеть</a></p>
+                        </li>
+                        <li>
+                            <p><a href="{% url 'user_register' %}">Зарегестрироваться</a></p>
+                        </li>
+                        {% endif %}
+                    </ul>
+                </div>
+        </div>
     </nav>
     <h1>Welcome, {{ user.username|default:"Пользователь" }}</h1>
     <div>

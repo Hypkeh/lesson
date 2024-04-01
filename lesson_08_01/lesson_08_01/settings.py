@@ -40,6 +40,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
+    #3d party
+    'bootstrap4',
+
     # local
     'new_app',
     'ads',
