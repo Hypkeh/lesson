@@ -24,29 +24,33 @@
                         </li>
                     </ul>
                     <form class="form-inline my-2 my-lg-2" method="get" action="{% url 'search_form' %}">
-                        {{ search_form.as_p }}
-                        <input type="submit" value="Найти">
+                        <div class="mr-2">
+                            {{ search_form.as_p }}
+                        </div>
+                        <input class="btn btn-primary my-2 my-sm-0" type="submit" value="Найти">
                     </form>
                     {% if user.is_authenticated %}
-                    <ul>
-                        <li>
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'author_formset' %}">Author formset</a>
+                        </li>
+                        <li class="nav-item">
                             <form method="post" action="{% url 'logout_view' %}">
                                 {% csrf_token %}
-                                <button type="submit" value="Выйти из сети">Выйти из сети</button>
+                                <button class="btn btn-danger my-2 my-sm-0" type="submit" value="Выйти из сети">Выйти из сети</button>
                             </form>
                         </li>
-                        <li>
-                            <a href="{% url 'author_formset' %}">Author formset</a>
-                        </li>
-                        {% else %}
-                        <li>
-                            <p><a href="{% url 'login_view' %}">Войти в сеть</a></p>
-                        </li>
-                        <li>
-                            <p><a href="{% url 'user_register' %}">Зарегестрироваться</a></p>
-                        </li>
-                        {% endif %}
                     </ul>
+                    {% else %}
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'login_view' %}">Войти в сеть</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'user_register' %}">Зарегестрироваться</a>
+                        </li>
+                    </ul>
+                    {% endif %}
                 </div>
         </div>
     </nav>
