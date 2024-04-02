@@ -7,5 +7,7 @@ urlpatterns = [
     path('change_password/', views.UserPasswordChangeView.as_view(), name='change_password'),
     path('permissions/', views.UserPermissions.as_view(), name='user_permissions'),
     path('profile/', views.profile_view, name='user_profile'),
-    path('register/', views.SignUpView.as_view(), name='user_register')
+    path('register/', views.SignUpView.as_view(), name='user_register'),
+    path('upload_file/', views.add_file, name='upload_file'),
+    path('upload_photo/', views.add_photo, name='upload_photo')
 ]

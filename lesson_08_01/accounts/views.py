@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.contrib.auth.views import LoginView, LogoutView, PasswordChangeView
 from django.contrib.auth.forms import AuthenticationForm
 from django.views.generic import TemplateView
@@ -10,6 +10,7 @@ from django.urls import reverse_lazy
 from django.contrib.auth.models import User
 
 from . import forms
+from .models import UserFile
 
 # Create your views here.
 
@@ -23,7 +24,9 @@ class SignUpView(CreateView):
 def profile_view(request):
     username = request.user.username
     email = request.user.email
-    context = {'username': username, 'email': email}
+    user = request.user
+    photos = user.userphoto_set.all()
+    context = {'username': username, 'email': email, 'photos': photos}
     return render(request, 'accounts/profile.html', context)
 
 
@@ -64,3 +67,37 @@ def login_view(request):
                                                            'form': AuthenticationForm()})
     else:
         return render(request, 'accounts/login.html', {'form': AuthenticationForm()})
+
+
+def add_file(request):
+    if request.method == 'POST':
+        form = forms.FileForm(request.POST, request.FILES)
+        if form.is_valid():
+            user = request.user
+            new_file = form.save(commit=False)
+            new_file.user_id = user
+            new_file.save()
+            return redirect('main_page')
+    else:
+        form = forms.FileForm()
+    context = {'form': form}
+    return render(request, 'accounts/file_form.html', context)
+
+
+def add_photo(request):
+    if request.method == 'POST':
+        form = forms.PhotoForm(request.POST, request.FILES)
+        if form.is_valid():
+            user = request.user
+            new_file = form.save(commit=False)
+            new_file.user_id = user
+            new_file.save()
+            return redirect('main_page')
+    else:
+        form = forms.PhotoForm()
+    context = {'form': form}
+    return render(request, 'accounts/file_form.html', context)
+
+
+
+

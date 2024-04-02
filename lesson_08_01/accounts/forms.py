@@ -1,5 +1,6 @@
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
+from .models import UserFile, UserPhoto
 from django import forms
 
 
@@ -17,3 +18,17 @@ class SignUpForm(UserCreationForm):
             'password1',
             'password2'
         ]
+
+
+class FileForm(forms.ModelForm):
+
+    class Meta:
+        model = UserFile
+        exclude = ['user_id']
+
+
+class PhotoForm(forms.ModelForm):
+
+    class Meta:
+        model = UserPhoto
+        exclude = ['user_id']

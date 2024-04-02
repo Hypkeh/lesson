@@ -9,4 +9,16 @@
 </ul>
 <p><a href="{% url 'change_password' %}">Сменить пароль</a></p>
 <p><a href="{% url 'user_permissions' %}">Права пользователя</a></p>
+
+<div class="mt-4">
+    <h2 class="mb-4">Изображения данного пользователя</h2>
+    {% for photo in photos %}
+    <div class="card mb-3">
+        <div class="card-body">
+            <p class="card-text">Имя фото: {{ photo.image.name }}</p>
+            <img src="{{ photo.image.url }}">
+        </div>
+    </div>
+</div>
+{% endfor %}
 {% endblock %}
