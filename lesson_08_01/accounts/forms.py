@@ -2,6 +2,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
 from .models import UserFile, UserPhoto
 from django import forms
+from django.core.validators import FileExtensionValidator
 
 
 class SignUpForm(UserCreationForm):
@@ -28,6 +29,7 @@ class FileForm(forms.ModelForm):
 
 
 class PhotoForm(forms.ModelForm):
+    image = forms.ImageField(validators=[FileExtensionValidator(allowed_extensions=('jpg', 'png'))])
 
     class Meta:
         model = UserPhoto

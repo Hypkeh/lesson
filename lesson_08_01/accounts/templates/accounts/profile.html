@@ -16,6 +16,10 @@
     <div class="card mb-3">
         <div class="card-body">
             <p class="card-text">Имя фото: {{ photo.image.name }}</p>
+            <form method="post" action="{% url 'delete_photo' pk=photo.pk %}" class="justify-content-center my-2">
+                {% csrf_token %}
+                <input class="btn btn-danger" value="Удалить изображение" type="submit">
+            </form>
             <img src="{{ photo.image.url }}">
         </div>
     </div>

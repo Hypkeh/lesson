@@ -21,6 +21,8 @@ urlpatterns = [
 
     path('author_formset/', views.author_formset, name='author_formset'),
 
-    path('atomic/', views.add_record)
+    path('atomic/', views.add_record),
+
+    path('cookies/', views.cookie_view, name='cookie_view')
 ]
 

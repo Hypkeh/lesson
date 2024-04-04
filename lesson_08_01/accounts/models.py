@@ -11,7 +11,7 @@ class UserFile(models.Model):
 
 class UserPhoto(models.Model):
     user_id = models.ForeignKey(User, on_delete=models.CASCADE)
-    image = models.ImageField(upload_to='user_images/')
+    image = models.ImageField(upload_to='user_images/%Y/%m/%d')
 
 # user_photo = UserPhoto.objects.first()
 # user = user_photo.user_id

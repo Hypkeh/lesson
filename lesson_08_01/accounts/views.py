@@ -10,7 +10,7 @@ from django.urls import reverse_lazy
 from django.contrib.auth.models import User
 
 from . import forms
-from .models import UserFile
+from .models import UserFile, UserPhoto
 
 # Create your views here.
 
@@ -99,5 +99,11 @@ def add_photo(request):
     return render(request, 'accounts/file_form.html', context)
 
 
+def delete_photo(request, pk):
+    if request.method == 'POST':
+        img = UserPhoto.objects.get(pk=pk)
+        img.image.delete()
+        img.delete()
+        return redirect('user_profile')
 
-
+# django-cleanup - очистка от файлов без записи в БД

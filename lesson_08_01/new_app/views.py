@@ -10,6 +10,8 @@ from django.db.models import Value, F
 from django.contrib.auth.decorators import login_required, permission_required, user_passes_test
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin, PermissionRequiredMixin
 from django.db.transaction import atomic
+from django.contrib import messages
+from django.core.signing import TimestampSigner
 
 from .models import Post, Author, Category
 from .forms import AuthorForm, PostForm, UserRegistrationForm, SearchForm, AuthorFormset
@@ -23,7 +25,6 @@ from .forms import AuthorForm, PostForm, UserRegistrationForm, SearchForm, Autho
 #             return HttpResponse
 #     return wrapper
 
-@user_passes_test(lambda user: user.is_superuser)
 def author_formset(request):
     if request.method == 'POST':
         formset = AuthorFormset(request.POST)
@@ -32,6 +33,7 @@ def author_formset(request):
             return HttpResponse('ok')
     else:
         formset = AuthorFormset()
+    messages.add_message(request, messages.ERROR, 'Введите данные об авторах')
     context = {'formset': formset}
     return render(request, 'new_app/author_formset.html', context)
 
@@ -85,6 +87,10 @@ class UserRegisterView(FormView):
 class AuthorList(ListView):
     model = Author
     paginate_by = 2
+
+    def dispatch(self, request, *args, **kwargs):
+        messages.info(request, 'Все авторы')
+        return super().dispatch(request, *args, **kwargs)
 
 
 class AuthorCreate(CreateView):
@@ -141,26 +147,41 @@ class MainPage(TemplateView):
 def add_record(request):
     category = Category.objects.create(name='test_atomic')
     category = Category.objects.create(name='test_atomic2')
-    1/0
     category = Category.objects.create(name='test_atomic3')
     return HttpResponse('atomic')
 
 
+def cookie_view(request):
+    try:
+        cnt = request.get_signed_cookie('counter')
+    except KeyError:
+        cnt = 0
+    cnt = int(cnt) + 1
+    response = HttpResponse(cnt)
+    response.set_signed_cookie('counter', cnt)
+    return response
 
-    # def get_context_data(self, **kwargs):
-    #     context = super().get_context_data(**kwargs)
-    #     b = [1, 1, 1, 2, 3, 3, 3, 4, 4, 5]
-    #     list_of_booleans = [True, False, True, None]
-    #     c = Post.objects.last()
-    #     condition = 10
-    #     number = 34.123131
-    #     context['b'] = b
-    #     context['post'] = c
-    #     context['condition'] = condition
-    #     context['boolean_list'] = list_of_booleans
-    #     context['number'] = number
-    #     # new_context = {'var': a}
-    #     # context.update(new_context)
-    #     return context
 
+
+
+
+
+
+
+
+
+
+
+    # cnt = int(request.COOKIES.get('counter', 0)) + 1
+    # response = HttpResponse('COOKIES')
+    # import datetime
+    # ten_minutes = datetime.datetime.now() + datetime.timedelta(seconds=10)
+    # response.set_cookie('counter', cnt, path='cookies/')
+    # return response
+    # if 'counter' in request.session:
+    #     cnt = request.session['counter'] + 1
+    # else:
+    #     cnt = 1
+    # request.session['counter'] = cnt
+    # return HttpResponse(request.session['counter'])
 
