@@ -43,9 +43,11 @@ INSTALLED_APPS = [
 
     #3d party
     'bootstrap4',
+    'rest_framework',
 
     # local
     'new_app',
+    'drf_app',
     'ads',
     'task',
     'articles',

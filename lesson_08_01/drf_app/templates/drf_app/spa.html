@@ -1,0 +1,11 @@
+{% extends 'main/navbar.html' %}
+{% load static %}
+
+{% block title %}SPA{% endblock %}
+
+{% block content %}
+    <div id="app"></div>
+    <script src="{% static 'js/app.js' %}">
+        
+    </script>
+{% endblock %}
