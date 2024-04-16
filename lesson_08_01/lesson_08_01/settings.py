@@ -44,6 +44,8 @@ INSTALLED_APPS = [
     #3d party
     'bootstrap4',
     'rest_framework',
+    'drf_yasg',
+    'rest_framework_simplejwt',
 
     # local
     'new_app',
@@ -51,6 +53,7 @@ INSTALLED_APPS = [
     'ads',
     'task',
     'articles',
+    'palnet_exploration',
 ]
 
 MIDDLEWARE = [
@@ -144,6 +147,12 @@ MESSAGE_LEVEL = messages.DEBUG
 # MESSAGE_TAGS
 
 # {"INFO": 20, "DEBUG": 10}
+
+REST_FRAMEWORK = {
+    "DEFAULT_AUTHENTICATION_CLASSES": (
+        "rest_framework_simplejwt.authentication.JWTAuthentication",
+    )
+}
 
 
 

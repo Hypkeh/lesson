@@ -18,6 +18,7 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf.urls.static import static
 from django.conf import settings
+from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 
 
 urlpatterns = [
@@ -26,6 +27,9 @@ urlpatterns = [
     path('', include('new_app.urls')),
     path('accounts/', include('accounts.urls')),
     path('api/', include('drf_app.urls')),
+    path('space_api/', include('palnet_exploration.urls')),
+    path('token/', TokenObtainPairView.as_view(), name='api_authenticate'),
+    path('token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

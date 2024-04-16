@@ -15,8 +15,6 @@ class PublisherViewSet(viewsets.ModelViewSet):
     queryset = Publisher.objects.all()
 
 
-
-
 class AuthorList(generics.ListCreateAPIView):
     queryset = Author.objects.all()
     serializer_class = AuthorSerializer

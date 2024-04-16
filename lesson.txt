@@ -1,9 +1,9 @@
 
-1) Закончим ViewSet
-2) actions
-3) Создание документации для API
-4) Postman
-5) Авторизация и аутенификация (JWT-token)
+4) Авторизация и аутенификация (JWT-token)
+5) Postman
+
+- НЕСТАЦИОНАРНЫЕ ЗАПРОСЫ
+- токены (JWT-токен)
 
 DRY - Don't Repeat Yourself
 
