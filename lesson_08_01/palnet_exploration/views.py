@@ -26,7 +26,12 @@ class PlanetViewSet(viewsets.ModelViewSet):
 class ExplorerViewSet(viewsets.ModelViewSet):
     queryset = Explorer.objects.all()
     serializer_class = ExplorerSerializer
-    permission_classes = [permissions.IsAuthenticated]
+
+    def get_permissions(self):
+        if self.action in ['list', 'detail']:
+            return [permissions.AllowAny()]
+        else:
+            return [permissions.IsAuthenticated()]
 
     @action(detail=True, methods=['get'])
     def discovered_planets(self, request, pk):
