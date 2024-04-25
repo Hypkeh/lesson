@@ -1,9 +1,12 @@
 
-4) Авторизация и аутенификация (JWT-token)
-5) Postman
-
-- НЕСТАЦИОНАРНЫЕ ЗАПРОСЫ
-- токены (JWT-токен)
+Практическая работа:
+1) Новое приложение
+2) Новые модели
+- Car (model, year, price, manufacturer)
+- Manufacturer (name, country)
+3) CRUD
+4) Поиск по Manufacturer для автомобилей
+Фильтрация по стране для Manufacturer
 
 DRY - Don't Repeat Yourself
 

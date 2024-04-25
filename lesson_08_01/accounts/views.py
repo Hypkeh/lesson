@@ -8,11 +8,39 @@ from django.http import HttpResponseRedirect, HttpResponse
 from django.conf import settings
 from django.urls import reverse_lazy
 from django.contrib.auth.models import User
+from django.contrib.auth.forms import UserCreationForm
+from django.core.signing import Signer, BadSignature
 
 from . import forms
 from .models import UserFile, UserPhoto
 
 # Create your views here.
+
+
+def activate(request, signed_username):
+    signer = Signer()
+
+    try:
+        username = signer.unsign(signed_username)
+        user = User.objects.get(username=username)
+        user.is_active = True
+        user.save()
+        return redirect('login_view')
+    except (User.DoesNotExist, BadSignature):
+        return redirect('register')
+
+
+def register(request):
+    if request.method == 'POST':
+        data = request.POST # request.GET = {'name': 'new_name'}
+        form = forms.SignUpForm(data)
+        if form.is_valid():
+            form.save()
+            return redirect('login_view')
+    else:
+        form = forms.SignUpForm()
+    return render(request, 'accounts/file_form.html', {'form': form})
+
 
 
 class SignUpView(CreateView):
