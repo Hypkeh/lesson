@@ -54,6 +54,7 @@ class PostForm(ModelForm):
         fields = '__all__'
 
 
+
 # label - надпись для поля
 # label_suffix - дополнительный поясняющий текст
 # initial
@@ -61,7 +62,6 @@ class PostForm(ModelForm):
 # widget - выбор тега HTML, который будет отвечать за заполнение поля
 # validators - список программных модулей, которые проверяют верность заполнения поля
 # disabled
-
 # CharField(min_length, max_length, strip)
 # EmailField
 # RegexField
@@ -81,8 +81,17 @@ class PostForm(ModelForm):
 # DateInput
 
 
-class CategoryForm(forms.ModelForm):
 
+class PostForm(forms.ModelForm):
+    messages = forms.CharField(max_length=100, label='Сообщение')
+    comments = forms.CharField(max_length=100, label='Комментарий')
+
+    class Meta:
+        fields = '__all__'
+        model = Post
+
+
+class CategoryForm(forms.ModelForm):
 
     class Meta:
         fields = '__all__'

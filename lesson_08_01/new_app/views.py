@@ -1,3 +1,4 @@
+from sre_constants import CATEGORY
 from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView, FormView
@@ -185,3 +186,12 @@ def cookie_view(request):
     # request.session['counter'] = cnt
     # return HttpResponse(request.session['counter'])
 
+class CategoryCreate(CreateView):
+    model = Category
+    form_class = PostForm
+    fields = '__all__'
+
+class CategoryDelete(DeleteView):
+    model = Category
+    template_name = 'new_app/post_form.html'
+    success_url = reverse_lazy('category_list')

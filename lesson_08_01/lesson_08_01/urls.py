@@ -30,6 +30,7 @@ urlpatterns = [
     path('space_api/', include('palnet_exploration.urls')),
     path('token/', TokenObtainPairView.as_view(), name='api_authenticate'),
     path('token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
+    path('tasks/', include('task_list.urls'))
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -1,0 +1,11 @@
+{% extends "main/paginator.html" %}
+
+
+
+{% block content %}
+    {% for task in task_list %}
+    <p>{{ task.task }}</p>
+    <p>{{ task.until_date }}</p>
+
+    {% endfor %}
+{% endblock %}

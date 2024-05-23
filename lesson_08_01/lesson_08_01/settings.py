@@ -12,10 +12,7 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 import os.path
 from pathlib import Path
 from django.contrib import messages
-import dotenv
 import os
-
-dotenv.load_dotenv()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -25,7 +22,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY')
+SECRET_KEY = 'django-insecure-^@6m1exs4!q=0p7==n3))2c$+%87kk8y1it^g#2s8sit&(oeau'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -58,6 +55,7 @@ INSTALLED_APPS = [
     'task',
     'articles',
     'palnet_exploration',
+    'task_list'
 ]
 
 MIDDLEWARE = [
